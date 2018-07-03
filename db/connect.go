@@ -1,11 +1,14 @@
 package db
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
 	_ "github.com/alexbrainman/odbc"
+	_ "github.com/amsokol/ignite-go-client/sql"
 	u "github.com/nombiezinja/ignite-cursor-example/utils"
 )
 
@@ -25,6 +28,25 @@ func Connect() *sql.DB {
 	u.FailOnError(err, "Failed to ping ODBC")
 
 	fmt.Println("Apache Ignite connection successfully established")
+
+	return db
+}
+
+func ClientConnect() *sql.DB {
+
+	ctx := context.Background()
+
+	// open connection
+	db, err := sql.Open("ignite", "tcp://localhost:10800/BUYS?")
+
+	if err != nil {
+		log.Fatalf("failed to open connection: %v", err)
+	}
+
+	// ping
+	if err = db.PingContext(ctx); err != nil {
+		log.Fatalf("ping failed: %v", err)
+	}
 
 	return db
 }

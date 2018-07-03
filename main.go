@@ -5,31 +5,27 @@ import (
 
 	_ "github.com/alexbrainman/odbc"
 
-	"github.com/nombiezinja/ignite-cursor-example/db"
 	u "github.com/nombiezinja/ignite-cursor-example/utils"
+
+	"github.com/nombiezinja/ignite-cursor-example/db"
 )
 
-var DB = db.Connect()
+// var DB = db.Connect()
+var DB = db.ClientConnect()
 
 // Create a table and some hard coded rows to query with
 func init() {
 
-	_, err := DB.Exec("DROP TABLE IF EXISTS FOOS;")
-	u.FailOnError(err, "Failed to delete table")
-
-	_, err = DB.Exec("CREATE TABLE FOOS (ID VARCHAR(255) PRIMARY KEY, VALUE NUMERIC );")
-	u.FailOnError(err, "Failed to create table")
-
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f800', 1.0)")
+	_, err := DB.Exec("INSERT INTO BUYS.BUYS VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f800', 1.0)")
 	u.FailOnError(err, "Failed to insert")
 
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f801', 1.1)")
-	u.FailOnError(err, "Failed to insert")
+	// _, err = DB.Exec("INSERT INTO BUYS.BUYS VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f801', 1.1)")
+	// u.FailOnError(err, "Failed to insert")
 
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f802', 1.2)")
-	u.FailOnError(err, "Failed to insert")
+	// _, err = DB.Exec("INSERT INTO BUYS.BUYS VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f802', 1.2)")
+	// u.FailOnError(err, "Failed to insert")
 
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f803', 1.3)")
+	_, err = DB.Exec("INSERT INTO BUYS.BUYS VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f803', 1.3)")
 	u.FailOnError(err, "Failed to insert")
 
 }
@@ -43,7 +39,7 @@ func main() {
 }
 
 func getEntry() {
-	statement := `SELECT ID, VALUE FROM FOOS ORDER BY VALUE DESC LIMIT 1`
+	statement := `SELECT ID, VALUE FROM BUYS.BUYS ORDER BY VALUE DESC LIMIT 1`
 
 	var b Bar
 
