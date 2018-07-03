@@ -8,27 +8,17 @@
         http://www.springframework.org/schema/util/spring-util.xsd">
 
   <bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration">
-    <property name="clientConnectorConfiguration">
-      <bean class="org.apache.ignite.configuration.ClientConnectorConfiguration" />
-    </property>
-    
-    <property name="odbcConfiguration">
-      <bean class="org.apache.ignite.configuration.OdbcConfiguration"/>
-    </property>
 
-    <property name="discoverySpi">
-      <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
-        <property name="ipFinder">
-          <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder">
-            <property name="addresses">
-              <list>
-                <value>127.0.0.1:47500..47501</value>
-              </list>
-            </property>
-          </bean>
-        </property>
+    <property name="odbcConfiguration">
+      <bean class="org.apache.ignite.configuration.OdbcConfiguration">
+        <property name="endpointAddress" value="127.0.0.1:12345..12346"/>
+        <property name="maxOpenCursors" value="128"/>
+        <property name="socketSendBufferSize" value="65536"/>
+        <property name="socketReceiveBufferSize" value="131072"/>
+        <property name="threadPoolSize" value="4"/>
       </bean>
     </property>
+
 
   </bean>
 </beans>
