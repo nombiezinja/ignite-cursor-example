@@ -5,6 +5,6 @@ import (
 )
 
 func Setenv() {
-	os.Setenv("address", "127.0.0.1:12345")
+	os.Setenv("address", "127.0.0.1:10800")
 	os.Setenv("cache", "default")
 }
