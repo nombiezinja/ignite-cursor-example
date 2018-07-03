@@ -1,7 +1,6 @@
 package db
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
 	"log"
@@ -34,19 +33,15 @@ func Connect() *sql.DB {
 
 func ClientConnect() *sql.DB {
 
-	ctx := context.Background()
-
-	// open connection
-	db, err := sql.Open("ignite", "tcp://localhost:10800/BUYS?")
+	db, err := sql.Open("ignite", "tcp://localhost:10800/books")
 
 	if err != nil {
 		log.Fatalf("failed to open connection: %v", err)
 	}
 
 	// ping
-	if err = db.PingContext(ctx); err != nil {
-		log.Fatalf("ping failed: %v", err)
-	}
+	err = db.Ping()
+	u.FailOnError(err, "Failed to ping ODBC")
 
 	return db
 }
