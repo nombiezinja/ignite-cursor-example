@@ -11,6 +11,10 @@
     <property name="clientConnectorConfiguration">
       <bean class="org.apache.ignite.configuration.ClientConnectorConfiguration" />
     </property>
+    
+    <property name="odbcConfiguration">
+      <bean class="org.apache.ignite.configuration.OdbcConfiguration"/>
+    </property>
 
     <property name="discoverySpi">
       <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
