@@ -1,9 +1,12 @@
 package main
 
 import (
+
+	// _ "github.com/alexbrainman/odbc"
+
 	"log"
 
-	_ "github.com/alexbrainman/odbc"
+	_ "bitbucket.org/miquella/mgodbc"
 
 	"github.com/nombiezinja/ignite-cursor-example/db"
 	u "github.com/nombiezinja/ignite-cursor-example/utils"
@@ -50,13 +53,13 @@ func getEntry() {
 	rows, err := DB.Query(statement)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("query err", err)
 	}
 
 	for rows.Next() {
 		err := rows.Scan(&b.ID, &b.Value)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("scan err", err)
 		}
 		log.Println("Retrieved entry:", b)
 	}
