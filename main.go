@@ -15,23 +15,33 @@ var DB = db.ClientConnect()
 // Create a table and some hard coded rows to query with
 func init() {
 
-	_, err := DB.Exec("DROP TABLE IF EXISTS FOOS;")
-	u.FailOnError(err, "Failed to delete table")
-
-	_, err = DB.Exec("CREATE TABLE FOOS (ID VARCHAR(255) PRIMARY KEY, VALUE NUMERIC );")
+	_, err := DB.Exec(`CREATE TABLE IF NOT EXISTS Person (
+		id int,
+		city_id int,
+		name varchar,
+		age int, 
+		company varchar,
+		PRIMARY KEY (id, city_id)
+	) WITH "template=partitioned,backups=1,affinitykey=city_id, key_type=PersonKey, value_type=MyPerson";`)
 	u.FailOnError(err, "Failed to create table")
 
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f800', 1.0)")
-	u.FailOnError(err, "Failed to insert")
+	// _, err := DB.Exec("DROP TABLE IF EXISTS FOOS;")
+	// u.FailOnError(err, "Failed to delete table")
 
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f801', 1.1)")
-	u.FailOnError(err, "Failed to insert")
+	// _, err = DB.Exec("CREATE TABLE FOOS (ID VARCHAR(255) PRIMARY KEY, VALUE NUMERIC );")
+	// u.FailOnError(err, "Failed to create table")
 
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f802', 1.2)")
-	u.FailOnError(err, "Failed to insert")
+	// _, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f800', 1.0)")
+	// u.FailOnError(err, "Failed to insert")
 
-	_, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f803', 1.3)")
-	u.FailOnError(err, "Failed to insert")
+	// _, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f801', 1.1)")
+	// u.FailOnError(err, "Failed to insert")
+
+	// _, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f802', 1.2)")
+	// u.FailOnError(err, "Failed to insert")
+
+	// _, err = DB.Exec("INSERT INTO foos VALUES('9661eef1-8cbd-4cc9-9eac-5786e137f803', 1.3)")
+	// u.FailOnError(err, "Failed to insert")
 
 }
 

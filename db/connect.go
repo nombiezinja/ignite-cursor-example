@@ -33,7 +33,7 @@ func Connect() *sql.DB {
 
 func ClientConnect() *sql.DB {
 
-	db, err := sql.Open("ignite", "tcp://localhost:10800/books")
+	db, err := sql.Open("ignite", "tcp://localhost:10800/PUBLIC")
 
 	if err != nil {
 		log.Fatalf("failed to open connection: %v", err)
