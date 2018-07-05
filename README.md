@@ -1,3 +1,5 @@
+Update 20180705 - awaiting fix from Apache Ignite team - https://issues.apache.org/jira/browse/IGNITE-8930 
+
 # Description
 
 Example app for reproducing the issue described here: https://github.com/alexbrainman/odbc/issues/121
